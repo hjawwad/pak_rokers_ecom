@@ -1,5 +1,6 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import { LayoutDashboard, Package, FolderTree, ShoppingCart, ArrowLeft } from 'lucide-react';
+import { NavLink, Outlet, Navigate } from 'react-router-dom';
+import { LayoutDashboard, Package, FolderTree, ShoppingCart, ArrowLeft, LogOut } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 const navItems = [
   { to: '/admin', icon: LayoutDashboard, label: 'Dashboard', end: true },
@@ -9,6 +10,12 @@ const navItems = [
 ];
 
 export default function AdminLayout() {
+  const { isAuthenticated, logout } = useAuth();
+
+  if (!isAuthenticated) {
+    return <Navigate to="/admin/login" replace />;
+  }
+
   return (
     <div className="min-h-screen flex bg-gray-100">
       {/* Sidebar */}
@@ -36,7 +43,7 @@ export default function AdminLayout() {
             </NavLink>
           ))}
         </nav>
-        <div className="p-4 border-t border-white/10">
+        <div className="p-4 border-t border-white/10 space-y-2">
           <NavLink
             to="/"
             className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors no-underline"
@@ -44,6 +51,13 @@ export default function AdminLayout() {
             <ArrowLeft size={16} />
             Back to Store
           </NavLink>
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 text-sm text-white/60 hover:text-red-400 transition-colors w-full"
+          >
+            <LogOut size={16} />
+            Logout
+          </button>
         </div>
       </aside>
 

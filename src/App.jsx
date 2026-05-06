@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AdminProvider } from './context/AdminContext';
+import { AuthProvider } from './context/AuthContext';
 import AnnouncementBar from './components/AnnouncementBar';
 import Header from './components/Header';
 import CartDrawer from './components/CartDrawer';
@@ -16,16 +17,21 @@ import Dashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminCategories from './pages/admin/AdminCategories';
 import AdminOrders from './pages/admin/AdminOrders';
+import AdminLogin from './pages/admin/AdminLogin';
 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <BrowserRouter>
+      <AuthProvider>
       <AdminProvider>
         <CartProvider>
           <Routes>
-            {/* Admin Routes */}
+            {/* Admin Login */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+
+            {/* Admin Routes (protected) */}
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="products" element={<AdminProducts />} />
@@ -57,6 +63,7 @@ function App() {
           </Routes>
         </CartProvider>
       </AdminProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
