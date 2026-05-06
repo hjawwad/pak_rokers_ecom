@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Search, Menu, X, User } from 'lucide-react';
+import { ShoppingCart, Search, Menu, X, User, Settings } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 export default function Header({ onCartOpen }) {
@@ -56,9 +56,9 @@ export default function Header({ onCartOpen }) {
             <button onClick={() => setSearchOpen(!searchOpen)} className="p-2 hover:bg-gray-100 rounded-full transition-colors" aria-label="Search">
               <Search size={20} />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors hidden sm:block" aria-label="Account">
-              <User size={20} />
-            </button>
+            <Link to="/admin" className="p-2 hover:bg-gray-100 rounded-full transition-colors hidden sm:block" aria-label="Admin Panel">
+              <Settings size={20} />
+            </Link>
             <button onClick={onCartOpen} className="p-2 hover:bg-gray-100 rounded-full transition-colors relative" aria-label="Cart">
               <ShoppingCart size={20} />
               {itemCount > 0 && (

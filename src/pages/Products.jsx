@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SlidersHorizontal, Grid3X3, LayoutList, ChevronDown } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { products, categories } from '../data/products';
+import { useAdmin } from '../context/AdminContext';
 
 const sortOptions = [
   { value: 'featured', label: 'Featured' },
@@ -13,6 +13,7 @@ const sortOptions = [
 ];
 
 export default function Products() {
+  const { products, categories } = useAdmin();
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortBy, setSortBy] = useState('featured');
   const [gridCols, setGridCols] = useState(3);

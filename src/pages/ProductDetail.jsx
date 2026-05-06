@@ -4,11 +4,13 @@ import { ShoppingCart, Heart, Share2, Check, Truck, Shield, RotateCcw, Star, Che
 import { useCart } from '../context/CartContext';
 import StarRating from '../components/StarRating';
 import ProductCard from '../components/ProductCard';
-import { products, reviews as allReviews } from '../data/products';
+import { reviews as allReviews } from '../data/products';
+import { useAdmin } from '../context/AdminContext';
 
 export default function ProductDetail() {
   const { slug } = useParams();
   const { addItem } = useCart();
+  const { products } = useAdmin();
 
   const product = products.find((p) => p.slug === slug);
   const [selectedImage, setSelectedImage] = useState(0);

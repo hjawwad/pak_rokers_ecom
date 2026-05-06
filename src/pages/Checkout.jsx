@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ChevronRight, Lock, CreditCard, Truck, ShieldCheck } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useAdmin } from '../context/AdminContext';
 
 const initialForm = {
   email: '',
@@ -29,6 +30,7 @@ const shippingOptions = [
 
 export default function Checkout() {
   const { items, subtotal, clearCart } = useCart();
+  const { addOrder } = useAdmin();
   const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
@@ -93,21 +95,21 @@ export default function Checkout() {
     // Simulate payment processing
     await new Promise((r) => setTimeout(r, 2000));
     const orderId = 'PR-' + Date.now().toString(36).toUpperCase();
+    const orderData = {
+      orderId,
+      email: form.email,
+      name: `${form.firstName} ${form.lastName}`,
+      address: `${form.address}${form.apartment ? ', ' + form.apartment : ''}, ${form.city}, ${form.state} ${form.zip}`,
+      shipping: shipping.label,
+      items: items.map((i) => ({ name: i.name, variant: i.variant, quantity: i.quantity, price: i.price })),
+      subtotal,
+      shippingCost,
+      tax,
+      total,
+    };
+    addOrder(orderData);
     clearCart();
-    navigate('/order-confirmation', {
-      state: {
-        orderId,
-        email: form.email,
-        name: `${form.firstName} ${form.lastName}`,
-        address: `${form.address}${form.apartment ? ', ' + form.apartment : ''}, ${form.city}, ${form.state} ${form.zip}`,
-        shipping: shipping.label,
-        items: items.map((i) => ({ name: i.name, variant: i.variant, quantity: i.quantity, price: i.price })),
-        subtotal,
-        shippingCost,
-        tax,
-        total,
-      },
-    });
+    navigate('/order-confirmation', { state: orderData });
   };
 
   const formatCardNumber = (val) => {

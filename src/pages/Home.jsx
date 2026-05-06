@@ -1,8 +1,10 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Truck, Shield, RotateCcw, Award, Star, ChevronRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import StarRating from '../components/StarRating';
-import { products, categories, testimonials } from '../data/products';
+import { testimonials } from '../data/products';
+import { useAdmin } from '../context/AdminContext';
 
 const trustSignals = [
   { icon: Truck, title: 'Free Shipping', desc: 'On orders over $50' },
@@ -11,10 +13,10 @@ const trustSignals = [
   { icon: Award, title: 'Premium Quality', desc: 'Trusted by 50,000+' },
 ];
 
-const featuredProducts = products.filter((p) => p.badge === 'Bestseller' || p.badge === 'Hot Deal').slice(0, 4);
-const saleProducts = products.filter((p) => p.badge === 'Sale').slice(0, 4);
-
 export default function Home() {
+  const { products, categories } = useAdmin();
+  const featuredProducts = useMemo(() => products.filter((p) => p.badge === 'Bestseller' || p.badge === 'Hot Deal').slice(0, 4), [products]);
+  const saleProducts = useMemo(() => products.filter((p) => p.badge === 'Sale').slice(0, 4), [products]);
   return (
     <div>
       {/* Hero Section */}
