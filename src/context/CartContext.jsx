@@ -1,6 +1,16 @@
-import { createContext, useContext, useReducer, useCallback } from 'react';
+import { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
 
 const CartContext = createContext();
+const STORAGE_KEY = 'pak-rokers-cart';
+
+const loadCart = () => {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : { items: [] };
+  } catch {
+    return { items: [] };
+  }
+};
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -52,7 +62,11 @@ const cartReducer = (state, action) => {
 };
 
 export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, { items: [] });
+  const [state, dispatch] = useReducer(cartReducer, null, loadCart);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }, [state]);
 
   const addItem = useCallback((product, variant) => {
     dispatch({ type: 'ADD_ITEM', payload: { ...product, variant } });

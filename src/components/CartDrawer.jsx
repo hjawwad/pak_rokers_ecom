@@ -1,9 +1,10 @@
 import { X, Plus, Minus, ShoppingBag, Trash2 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function CartDrawer({ isOpen, onClose }) {
   const { items, removeItem, updateQuantity, itemCount, subtotal, clearCart } = useCart();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -89,7 +90,10 @@ export default function CartDrawer({ isOpen, onClose }) {
                 <span className="font-bold text-lg">${subtotal.toFixed(2)}</span>
               </div>
               <p className="text-xs text-gray-500">Shipping & taxes calculated at checkout</p>
-              <button className="w-full py-3.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-bold text-base">
+              <button
+                onClick={() => { onClose(); navigate('/checkout'); }}
+                className="w-full py-3.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-bold text-base"
+              >
                 Checkout — ${subtotal.toFixed(2)}
               </button>
               <button onClick={clearCart} className="w-full py-2 text-sm text-gray-500 hover:text-sale transition-colors">
