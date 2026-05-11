@@ -32,7 +32,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-4 text-sm uppercase tracking-wider">Support</h3>
             <ul className="space-y-2.5 list-none p-0 m-0">
-              <li><span className="text-gray-400 text-sm">Contact Us</span></li>
+              <li><Link to="/contact" className="text-gray-400 hover:text-white text-sm transition-colors no-underline">Contact Us</Link></li>
               <li><span className="text-gray-400 text-sm">Shipping Policy</span></li>
               <li><span className="text-gray-400 text-sm">Returns & Exchanges</span></li>
               <li><span className="text-gray-400 text-sm">FAQ</span></li>

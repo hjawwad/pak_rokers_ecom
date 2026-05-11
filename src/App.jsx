@@ -12,6 +12,7 @@ import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
+import Contact from './pages/Contact';
 import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/AdminProducts';
@@ -53,6 +54,7 @@ function App() {
                       <Route path="/product/:slug" element={<ProductDetail />} />
                       <Route path="/checkout" element={<Checkout />} />
                       <Route path="/order-confirmation" element={<OrderConfirmation />} />
+                      <Route path="/contact" element={<Contact />} />
                     </Routes>
                   </main>
                   <Footer />
