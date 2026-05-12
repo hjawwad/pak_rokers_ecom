@@ -60,7 +60,7 @@ export default function Contact() {
               </svg>
             </div>
             <h3 className="font-semibold mb-1">Phone</h3>
-            <p className="text-gray-600 text-sm">+92 300 1234567</p>
+            <p className="text-gray-600 text-sm">+1 (307) 269-6252</p>
           </div>
 
           <div className="bg-gray-50 rounded-xl p-6">
@@ -71,7 +71,7 @@ export default function Contact() {
               </svg>
             </div>
             <h3 className="font-semibold mb-1">Address</h3>
-            <p className="text-gray-600 text-sm">Lahore, Pakistan</p>
+            <p className="text-gray-600 text-sm">30 N Gould St Ste 28662<br />Sheridan, WY 82801, US</p>
           </div>
         </div>
 

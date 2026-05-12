@@ -13,6 +13,9 @@ import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
 import Contact from './pages/Contact';
+import ShippingPolicy from './pages/ShippingPolicy';
+import ReturnsExchanges from './pages/ReturnsExchanges';
+import FAQ from './pages/FAQ';
 import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/AdminProducts';
@@ -55,6 +58,9 @@ function App() {
                       <Route path="/checkout" element={<Checkout />} />
                       <Route path="/order-confirmation" element={<OrderConfirmation />} />
                       <Route path="/contact" element={<Contact />} />
+                      <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                      <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
+                      <Route path="/faq" element={<FAQ />} />
                     </Routes>
                   </main>
                   <Footer />
